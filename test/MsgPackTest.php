@@ -7,6 +7,7 @@ class MsgPackTest extends PHPUnit_Framework_TestCase
     {
         self::$tarantool = new Tarantool('localhost', getenv('PRIMARY_PORT'));
         self::$tarantool->authenticate('test', 'test');
+        self::$tarantool->ping();
     }
 
     public function test_00_msgpack_call() {

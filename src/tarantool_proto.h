@@ -99,9 +99,9 @@ void php_tp_encode_insert_or_replace(smart_string *str, uint32_t sync,
 				     uint32_t type);
 void php_tp_encode_delete(smart_string *str, uint32_t sync, uint32_t space_no,
 			  uint32_t index_no, zval *tuple);
-void php_tp_encode_call(smart_string *str, uint32_t sync, char *proc,
+void php_tp_encode_call(smart_string *str, uint32_t sync, const char *proc,
 			uint32_t proc_len, zval *tuple);
-void php_tp_encode_eval(smart_string *str, uint32_t sync, char *proc,
+void php_tp_encode_eval(smart_string *str, uint32_t sync, const char *proc,
 			uint32_t proc_len, zval *tuple);
 void php_tp_encode_update(smart_string *str, uint32_t sync, uint32_t space_no,
 			  uint32_t index_no, zval *key, zval *args);

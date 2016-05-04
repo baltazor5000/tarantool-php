@@ -25,12 +25,13 @@ void tntll_stream_close(php_stream *stream, const char *pid) {
 	TSRMLS_FETCH();
 	int rv = PHP_STREAM_PERSISTENT_SUCCESS;
 	if (stream == NULL)
-		php_stream_from_persistent_id(pid, &stream TSRMLS_CC);
+		rv = php_stream_from_persistent_id(pid, &stream TSRMLS_CC);
 	int flags = PHP_STREAM_FREE_CLOSE;
 	if (pid)
 		flags = PHP_STREAM_FREE_CLOSE_PERSISTENT;
-	if (rv == PHP_STREAM_PERSISTENT_SUCCESS && stream)
+	if (rv == PHP_STREAM_PERSISTENT_SUCCESS && stream) {
 		php_stream_free(stream, flags);
+	}
 }
 
 int tntll_stream_fpid2(const char *pid, php_stream **ostream) {
@@ -97,7 +98,6 @@ int tntll_stream_open(const char *host, int port, const char *pid,
 			 strerror(errno));
 		goto error;
 	}
-	
 	*ostream = stream;
 	return 0;
 error:
@@ -120,7 +120,7 @@ int tntll_stream_read2(php_stream *stream, char *buf, size_t size) {
 					    size - total_size);
 		assert(read_size + total_size <= size);
 		if (read_size <= 0)
-			 break;
+			break;
 		total_size += read_size;
 	}
 	return total_size;

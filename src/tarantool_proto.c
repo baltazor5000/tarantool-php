@@ -178,7 +178,7 @@ size_t php_tp_sizeof_call(uint32_t sync,
 }
 
 void php_tp_encode_call(smart_string *str, uint32_t sync,
-		char *proc, uint32_t proc_len, zval *tuple) {
+		const char *proc, uint32_t proc_len, zval *tuple) {
 	size_t packet_size = php_tp_sizeof_call(sync,
 			proc_len, tuple);
 	smart_string_ensure(str, packet_size + 5);
@@ -201,7 +201,7 @@ size_t php_tp_sizeof_eval(uint32_t sync,
 }
 
 void php_tp_encode_eval(smart_string *str, uint32_t sync,
-		char *proc, uint32_t proc_len, zval *tuple) {
+		const char *proc, uint32_t proc_len, zval *tuple) {
 	size_t packet_size = php_tp_sizeof_eval(sync,
 			proc_len, tuple);
 	smart_string_ensure(str, packet_size + 5);
